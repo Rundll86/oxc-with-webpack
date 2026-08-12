@@ -1,0 +1,45 @@
+name: CI
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: 检出代码
+              uses: actions/checkout@v4
+
+            - name: 安装 pnpm
+              uses: pnpm/action-setup@v4
+              with:
+                  version: 10.30.3
+
+            - name: 安装 Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+                  cache: pnpm
+
+            - name: 安装依赖
+              run: pnpm install --frozen-lockfile
+
+            - name: 编译项目（tsup 构建 ESM + CJS）
+              run: pnpm build
+
+            - name: 类型检查
+              run: pnpm typecheck
+
+            - name: Lint（oxlint）
+              run: pnpm lint
+
+            - name: 格式检查（oxfmt）
+              run: pnpm format:check
+
+            - name: 校验构建产物
+              run: |
+                  test -f dist/index.js
+                  test -f dist/index.cjs

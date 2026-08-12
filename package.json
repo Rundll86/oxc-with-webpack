@@ -20,7 +20,9 @@
         "typecheck": "tsc --noEmit",
         "lint": "oxlint",
         "format": "oxfmt",
-        "format:check": "oxfmt --check"
+        "format:check": "oxfmt --check",
+        "test": "vitest run",
+        "test:watch": "vitest"
     },
     "dependencies": {
         "iconv-lite": "^0.7.3",
@@ -31,11 +33,15 @@
     "devDependencies": {
         "@types/node": "^26.2.0",
         "@types/yauzl": "^3.4.0",
+        "@types/yazl": "^3.3.1",
         "oxfmt": "^0.63.0",
         "oxlint": "^1.78.0",
         "tsup": "^8.5.1",
-        "typescript": "^5.9.3"
+        "typescript": "^5.9.3",
+        "vitest": "^4.1.10",
+        "yazl": "^3.3.1"
     },
+    "packageManager": "pnpm@10.30.3",
     "pnpm": {
         "onlyBuiltDependencies": [
             "esbuild"

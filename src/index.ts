@@ -19,11 +19,7 @@ function dzfn(etr: yauzl.Entry): string {
     if (iu8) {
         return rn.toString("utf-8");
     }
-    return (
-        sd(rn, u8d) ??
-        sd(rn, gbkd) ??
-        iconv.decode(rn, "cp437")
-    );
+    return sd(rn, u8d) ?? sd(rn, gbkd) ?? iconv.decode(rn, "cp437");
 }
 async function cvrtimg(src: string, dst: string): Promise<void> {
     const mt = await sharp(src).metadata();
@@ -99,10 +95,7 @@ async function main(): Promise<void> {
     }
     const turef = fs.readdirSync("assets/textures").sort();
     for (let i = 0; i < turef.length; i++) {
-        await cvrtimg(
-            path.join("assets/textures", turef[i]),
-            path.join("textures", `${i}.png`),
-        );
+        await cvrtimg(path.join("assets/textures", turef[i]), path.join("textures", `${i}.png`));
     }
     fs.mkdirSync("comics", { recursive: true });
     const cmf = fs.readdirSync("assets/comics").sort();
@@ -129,3 +122,5 @@ if (iep()) {
         process.exitCode = 1;
     });
 }
+
+export { dzfn as decodeZipFileName, cvrtimg as convertImage, ez as extractZip, main };
