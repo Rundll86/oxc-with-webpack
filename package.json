@@ -1,0 +1,44 @@
+{
+    "name": "oxc-with-webpack",
+    "version": "1.0.0",
+    "description": "Using oxc to resolve TypeScript modules in Webpack.",
+    "license": "MIT",
+    "files": [
+        "dist"
+    ],
+    "type": "module",
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.js",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "require": "./dist/index.cjs"
+        }
+    },
+    "scripts": {
+        "build": "tsup",
+        "typecheck": "tsc --noEmit",
+        "lint": "oxlint",
+        "format": "oxfmt",
+        "format:check": "oxfmt --check"
+    },
+    "dependencies": {
+        "iconv-lite": "^0.7.3",
+        "sharp": "^0.35.3",
+        "webpack": "^5.109.2",
+        "yauzl": "^3.4.0"
+    },
+    "devDependencies": {
+        "@types/node": "^26.2.0",
+        "@types/yauzl": "^3.4.0",
+        "oxfmt": "^0.63.0",
+        "oxlint": "^1.78.0",
+        "tsup": "^8.5.1",
+        "typescript": "^5.9.3"
+    },
+    "pnpm": {
+        "onlyBuiltDependencies": [
+            "esbuild"
+        ]
+    }
+}
